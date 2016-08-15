@@ -14,12 +14,16 @@
 % Create hyperlinks in bibliography
 \usepackage{hyperref}
 
-
+\renewcommand{\familydefault}{\sfdefault}
 \usepackage{fontspec}
 \setmainfont{Arial}
-\usepackage{blindtext}
-\setkomafont{disposition}{\normalfont\bfseries}
 
+\usepackage{blindtext}
+\setkomafont{disposition}{\normalfont\fontsize{12}{17}\bfseries}
+\setkomafont{section}{\normalfont\fontsize{12}{17}\bfseries}
+\setkomafont{subsection}{\normalfont\fontsize{12}{17}\bfseries\itshape}
+
+\usepackage{titlesec} 
 
 \graphicspath{{./resources/}}
 \addbibresource{~/PerryPerrySource/LaTeX/FYP_Bibliography.bib}
@@ -41,9 +45,8 @@
 
 \begin{document}
     \title{Descriptor Driven Concatenative Synthesis Tool}
-    \subtitle{\LARGE{Abstract Draft}}
+    % \subtitle{\LARGE{Abstract Draft}}
     \author{Sam Perry}
-    \date{}
 
     \maketitle
 
@@ -67,17 +70,47 @@
     potential offered through the offline processing of large databases, of
     which considerably less research exists.\\
 
-    Overall, results demonstrate the wide variety of sounds that can be
-    produced using this method of synthesis. A number of technical issues were
-    outlined that impeded the overall quality of results and efficiency of the
-    software. However, the project clearly demonstrates the strong potential
-    for this type synthesis to be used for creative purposes.
+    Results demonstrate the wide variety of sounds that can be produced using
+    this method of synthesis. A number of technical issues are outlined that
+    impeded the overall quality of results and efficiency of the software.
+    However, the project clearly demonstrates the strong potential for this
+    type synthesis to be used for creative purposes.
     \end{abstract}
 
     \section*{Background}
-    \subsection*{Granular synthesis}
-    \subsection*{Concatenative Synthesis}
-    \section*{Program Design and Implementation}
+    The concept of constructing a new sound by arranging collections of smaller
+    sonic events has gained popularity in the past 30 years through the
+    introduction of ``Granular Synthesis''. Granular synthesis works on the
+    theory that any sound can be described through the arrangement of smaller
+    samples (reffered to as ``grains'')~\parencite{itgs1988cr}. This allows
+    for the decomposition of real-world samples, 
+
+    What is granular synthesis?
+
+    How does concatenative synthesis build on this?
+    Uses large databases of audio and a unit-selection algorithm to produce results. - CS the early years
+    
+    What examples of concatenative synthesis already exist?
+
+    Offline approaches
+    Catapillar
+
+    Real-time approaches
+    Riding the waves - PA
+    CCCombine - Constanzo
+    SoundSpotter - Schwarz
+
+    Hybrid approaches
+    CataRT 
+
+
+    \section*{Concatenator Program Design and Implementation}
+    \subsection*{Framework Design}
+    \subsection*{Descriptor Implementation}
+    \subsection*{Matching Algorithms}
+    \subsection*{Synthesis and Transformations}
+    \subsection*{Command line Interface}
+
     \section*{Results and Evaluation}
     \section*{Research Limitations/Potential Improvments}
     \section*{Conclusion}
