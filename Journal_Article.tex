@@ -79,30 +79,53 @@
 
     \section*{Background}
     The concept of constructing a new sound by arranging collections of smaller
-    sonic events has gained popularity in the past 30 years through the
-    introduction of ``Granular Synthesis''. Granular synthesis works on the
-    theory that any sound can be described through the arrangement of smaller
-    samples (reffered to as ``grains''). This allows for the decomposition and
-    re-arranging of real-world samples, with the potential to create new
-    ``complex, dynamically-evolving sounds.''~\parencite[p.1]{itgs1988cr}
+    sounds has gained popularity in the past 30 years through the introduction
+    of ``Granular Synthesis''. Granular synthesis works on the theory that any
+    sound can be described through the arrangement of smaller samples (reffered
+    to as ``grains''). This representation of sound allows for the temporal
+    decomposition and re-arranging of real-world samples, with the potential to
+    create new ``complex, dynamically-evolving
+    sounds.''~\parencite[p.1]{itgs1988cr}\\
 
-    How does concatenative synthesis build on this?
-    Uses large databases of audio and a unit-selection algorithm to produce results. - CS the early years
+    Concatenative synthesis is a form of synthesis that has developed
+    significantly over the past 15 years, driven by recent advancements in
+    technology. Key advancements have been in easy access to large databases of
+    audio and the development of methods for extracting useful information from
+    these databases automatically~\parencite[p.1]{schwarz2006cstey}.
+    Concatenative synthesis utilises these technologies to provide a
+    content-based extension to granular
+    synthesis~\parencite[p.102]{schwarz2007cbcs}; by analysing a database of
+    source grains, grains can be differentiated based on their charcteristics.
+    These charachteristics can then be used for grain selection in the process
+    of synthesizing the output.
+
+    \subsection*{Related Works}
+    A number of programs utilize concatenative synthesis to achieve various
+    goals. The process has been used for applications in areas such as: 
+    \begin{itemize}
+        \item Speech Synthesis (Talkapillar)
+        \item Creative exploration of databases in a live performance context
+            (CCCombine, Riding the Waves)
+        \item Musical Instrument Synthesis (Synful)
+        \item Musical Sound Synthesis (CataRT, Catapillar)
+    \end{itemize}
+
+    The wide range of applications demonstrates the versatility of this
+    synthesis technique. It differs from traditional synthesis methods through
+    the use of real recorded samples. By transforming samples that have been
+    directly recorded from a source, the subtle nuances of the sources sound
+    are preserved. These would be difficult to reproduce using other synthetic
+    methods for modeling an instrument.~\parencite[p.24]{mrks2009csrs}
+
+    This is particularly important in speech Synthesis
     
-    What examples of concatenative synthesis already exist?
+    Progress has also been made in instrument Synthesis
 
-    Offline approaches
-    Catapillar
-
-    Real-time approaches
-    Riding the waves - PA
-    CCCombine - Constanzo
-    SoundSpotter - Schwarz
-
-    Hybrid approaches
-    CataRT 
-
-
+    There has also been considerable work on musical sound synthesis, where the
+    objective is not to emulate any real sound, but to explore the
+    possibilities for synthesizing new abstract sounds for creative purposes.
+    Perhaps the most advanced project in this area is CataRT;
+    
     \section*{Concatenator Program Design and Implementation}
     \subsection*{Framework Design}
     \subsection*{Descriptor Implementation}
@@ -111,6 +134,9 @@
     \subsection*{Command line Interface}
 
     \section*{Results and Evaluation}
+
     \section*{Research Limitations/Potential Improvments}
+    Given the limited time frame and complexity of modern approaches to this
+    form of synthesis, only a basic implementation was possible.
     \section*{Conclusion}
 \end{document}
