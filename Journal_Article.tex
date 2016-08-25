@@ -1,4 +1,3 @@
-
 \documentclass{scrartcl}
 \usepackage{enumitem}
 \usepackage[british]{babel}
@@ -26,7 +25,6 @@
 
 \graphicspath{{./resources/}}
 \addbibresource{~/PerryPerrySource/LaTeX/library.bib}
-
 
 \usepackage{etoolbox}
 \makeatletter
@@ -123,48 +121,61 @@
     Progress has also been made in improving the quality of instrument
     synthesis. As with speech synthesis, the use of samples directly allows for
     natural sounding results, which provides a method for reproducing real
-    instruments convincingly. An important aspect of instrument synthesis is
-    that of performer expression. The reproduction of performance qualities
-    such as dynamics, timbre and timing are an important factor and CS has been
-    used to effectively reproduce these aspects. This is achieved through
-    splicing of grains based on their characteristics to form musical phrases.
-    Just as a performer might transition seamlessly from one musical phrase to
-    the next, the CS software will join grains to produce the varying
-    articulations and transitions. This contrasts the traditional approach to
-    sampling, where samples are played in isolation, resulting in a
-    discontinuity between adjacent samples.  The comercial software synthesizer
-    ``Synful'' (\url{www.synful.com}) successfully demonstrates the use of
-    CS to produce highly convincing recreations of orchestral instrument
-    performances.~\parencite[p.82]{Lindemann2007}.
+    instruments convincingly.\\
+    Another important aspect of instrument synthesis is that of performer
+    expression. The reproduction of performance qualities such as dynamics,
+    timbre and timing are essential when emulating a real instrument and CS has
+    been used to effectively reproduce these aspects. This is achieved through
+    splicing of grains based on their expressive characteristics to form
+    musical phrases.  For example, just as a violinist might transition
+    seamlessly from one articulation to the next, the CS software will join
+    grains to produce the varyation in articulations. This contrasts the
+    traditional approach to sampling, where samples are played in isolation,
+    resulting in a discontinuity between adjacent samples.  The comercial
+    software synthesizer ``Synful'' (\url{www.synful.com}) successfully
+    demonstrates the use of CS to produce highly convincing recreations of
+    orchestral instrument performances in real-time.
+    ~\parencite[p.82]{Lindemann2007}.
 
     \subsubsection*{Creative Sound Design}
     The flexibilty of CS allows for creativity in a broader context than simply
     emulating real-world instruments and speech. It can also be used as a tool
     to explore the possibilities for synthesizing new abstract sounds for
-    creative purposes.
-    One example of this is Tremblay and Schwarz's~\citeyearpar{Tremblay2010}
-    use of ``audio mosaicing'' to explore electroacoustic sample banks. CS is
-    used in this context as a means for synthesizing matches in a corpus
-    database to real-time input from an electric bass.  Significance is placed
-    on linking the playback of grains to the expressivity of the performer. The
-    use of perceptualy based audio descriptors to match the source to the
-    target allows the performer to navigate the database intuitively based on
-    factors such as the pitch and timbre of the bass guitar. The result is a
-    performance that mixes characteristics of both the bass guitar performance
-    and the qualities of the corpus database to create a hybrid of the two.
-
-
-
-    further forms of concatenative synthesis techniques include: Spectral resynthesis (see tremblay sect 4.1.2)
+    creative purposes.\\
+    A prominent project in this area of CS is IRCAM's CataRT project *needs
+    reference*. The project focuses on the playback of source grains based on
+    their proximity to a target in multi-dimensional descriptor space. 
+    By providing a target point in the descriptor space, the user is able to
+    navigate the database, playing selections of samples that are nearest to
+    the target. This allows the user to explore the database intuitively
+    through a graphic user interface, selecting a point in 2-dimensional space
+    with the mouse. Grains are then played back in real-time to create an
+    ``audio mosaic''.\\
+    Alternatively, target audio can be provided and analysed to create a target
+    location based on it's location in the descriptor space.  Tremblay and
+    Schwarz's~\citeyearpar{Tremblay2010} use of CataRT to explore
+    electroacoustic sample banks demonstrates the creative potential of this
+    method. CS is used in this context as a means for synthesizing matches in a
+    corpus database to real-time input from an electric bass.  Significance is
+    placed on linking the playback of grains to the expressivity of the
+    performer. The use of perceptualy based audio descriptors to match the
+    source to the target allows the performer to navigate the database
+    naturally based on factors such as the pitch and timbre of the bass
+    guitar. The result is a performance that mixes characteristics of both the
+    bass guitar output and the qualities of the corpus database to create a
+    hybrid of the two.
     
     \section*{Concatenator Program Design and Implementation}
     Aims:
     instrument resynthesis onto a pre-existing source sound, rather than from scratch onto things like midi notes.
     Offline processing to allow for large databases to be used - disadvantage: loss of feedback between performer and system, as described in PA's paper.
+    advantage: Real-time approach results in reduced continuity of grains
     \subsection*{Framework Design}
     \subsection*{Descriptor Implementation}
+
     \subsection*{Matching Algorithms}
     \subsection*{Synthesis and Transformations}
+
     \subsection*{Command line Interface}
     High quantity of parameters is very time consuming ~\parencite{Petrushin2007} 
 
@@ -174,7 +185,9 @@
     Given the limited time frame and complexity of modern approaches to this
     form of synthesis, only a basic implementation was possible.
 
+    Spectral matching~\parencite{Hoffman2009} 
     Use of RPM?~\parencite[p.82]{Lindemann2007}
+    Viterbi path search~\parencite[p.1]{Schwarz2006a}
 
     \section*{Conclusion}
 
