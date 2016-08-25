@@ -48,23 +48,22 @@
     \maketitle
 
     \begin{abstract} 
-    A command-line tool is proposed for the exploration of a new form of audio
-    synthesis known as ``concatenative-synthesis'' (CS): A form of synthesis that uses
-    perceptual audio analyses to arrange small segments of audio based on their
-    characteristics.  The tool is designed to synthesise representations of an
-    input sound using a database of source sounds. This involves the
-    segmentation and analysis of both the input sound and database, matching of
-    input segments to their closest segment from the database, and the
-    re-synthesis of the closest matches from the database to produce the final
-    result.\\
+    A command-line tool and Python framework is proposed for the exploration of
+    a new form of audio synthesis known as ``concatenative-synthesis'' (CS): A
+    form of synthesis that uses perceptual audio analyses to arrange small
+    segments of audio based on their characteristics.  The tool is designed to
+    synthesise representations of an input sound using a database of source
+    sounds. This involves the segmentation and analysis of both the input sound
+    and database, matching of input segments to their closest segment from the
+    database, and the re-synthesis of the closest matches from the database to
+    produce the final result.\\
 
     The aim was to produce a tool capable of generating high quality sonic
     representations of an input, and to present a variety of examples that
     demonstrated the breadth of possibilities that this style of synthesis has
-    to offer. There are a number of other projects that use this form of
-    synthesis, however this project aims primarily to explore the further
-    potential offered through the offline processing of large databases, of
-    which considerably less research exists.\\
+    to offer. There are a number of projects that use this form of synthesis,
+    however this project aims primarily to explore the further potential
+    offered through the offline processing of large databases.\\
 
     Results demonstrate the wide variety of sounds that can be produced using
     this method of synthesis. A number of technical issues are outlined that
@@ -94,7 +93,7 @@
     then be used for grain selection in the process of synthesizing output for
     a wide range of applications~\parencite[p.102]{Schwarz2007}.
 
-    \subsection*{Related Works}
+    \section*{Related Works}
     A number of programs utilize CS to achieve various goals. The process has
     been used for applications in areas such as Speech Synthesis, Instrument
     synthesis and for applications in creative sound design.\\
@@ -107,7 +106,7 @@
     using other synthetic methods for modeling an
     instrument~\parencite[p.24]{Maestre2009a}.
 
-    \subsubsection*{Speech Synthesis}
+    \subsection*{Speech Synthesis}
     Creating a natural and intelligible realisation is an important factor when
     developing a speech synthesis system.*add part about continuity here* The
     Talkapillar project is one such example of how highly convincing results
@@ -117,12 +116,11 @@
     transformed to appear as if they were spoken by the voice in the
     database.~\parencite{Hueber}
     
-    \subsubsection*{Instrument Synthesis}
+    \subsection*{Instrument Synthesis}
     Progress has also been made in improving the quality of instrument
     synthesis. As with speech synthesis, the use of samples directly allows for
     natural sounding results, which provides a method for reproducing real
-    instruments convincingly.\\
-    Another important aspect of instrument synthesis is that of performer
+    instruments convincingly. Another important aspect of instrument synthesis is that of performer
     expression. The reproduction of performance qualities such as dynamics,
     timbre and timing are essential when emulating a real instrument and CS has
     been used to effectively reproduce these aspects. This is achieved through
@@ -131,26 +129,26 @@
     seamlessly from one articulation to the next, the CS software will join
     grains to produce the varyation in articulations. This contrasts the
     traditional approach to sampling, where samples are played in isolation,
-    resulting in a discontinuity between adjacent samples.  The comercial
-    software synthesizer ``Synful'' (\url{www.synful.com}) successfully
-    demonstrates the use of CS to produce highly convincing recreations of
-    orchestral instrument performances in real-time.
-    ~\parencite[p.82]{Lindemann2007}.
+    resulting in a discontinuity between adjacent samples~\parencite[p.82]{Lindemann2007}. 
+    The Catapillar project is one such example of this use of CS. 
+    By using a viterbi algorithm, the project is able to calculate the
+    smoothest overall transition between grains accross the output, resulting
+    in convincing synthesis of orchestral instrument performances~\parencite[p.5]{Schwarz2003}.
 
-    \subsubsection*{Creative Sound Design}
+    \subsection*{Creative Sound Design}
     The flexibilty of CS allows for creativity in a broader context than simply
     emulating real-world instruments and speech. It can also be used as a tool
     to explore the possibilities for synthesizing new abstract sounds for
     creative purposes.\\
-    A prominent project in this area of CS is IRCAM's CataRT project *needs
-    reference*. The project focuses on the playback of source grains based on
-    their proximity to a target in multi-dimensional descriptor space. 
-    By providing a target point in the descriptor space, the user is able to
-    navigate the database, playing selections of samples that are nearest to
-    the target. This allows the user to explore the database intuitively
-    through a graphic user interface, selecting a point in 2-dimensional space
-    with the mouse. Grains are then played back in real-time to create an
-    ``audio mosaic''.\\
+    A prominent project in this area of CS is IRCAM's CataRT
+    project~\parencite{Schwarz2006}. The project focuses on the playback of
+    source grains based on their proximity to a target in multi-dimensional
+    descriptor space.  By providing a target point in the descriptor space, the
+    user is able to navigate the database, playing selections of samples that
+    are nearest to the target. This allows the user to explore the database
+    intuitively through a graphic user interface, selecting a point in
+    2-dimensional space with the mouse. Grains are then played back in
+    real-time to create an ``audio mosaic''.\\
     Alternatively, target audio can be provided and analysed to create a target
     location based on it's location in the descriptor space.  Tremblay and
     Schwarz's~\citeyearpar{Tremblay2010} use of CataRT to explore
@@ -164,12 +162,16 @@
     guitar. The result is a performance that mixes characteristics of both the
     bass guitar output and the qualities of the corpus database to create a
     hybrid of the two.
-    
-    \section*{Concatenator Program Design and Implementation}
-    Aims:
+
+    \section{Concatenator}
+    The concatenator project aims to provide a Python framework and
+    command-line tool for concatenative synthesis.
+    Why Python?
     instrument resynthesis onto a pre-existing source sound, rather than from scratch onto things like midi notes.
     Offline processing to allow for large databases to be used - disadvantage: loss of feedback between performer and system, as described in PA's paper.
     advantage: Real-time approach results in reduced continuity of grains
+
+    \section*{Program Design and Implementation}
     \subsection*{Framework Design}
     \subsection*{Descriptor Implementation}
 
@@ -187,7 +189,7 @@
 
     Spectral matching~\parencite{Hoffman2009} 
     Use of RPM?~\parencite[p.82]{Lindemann2007}
-    Viterbi path search~\parencite[p.1]{Schwarz2006a}
+    Viterbi path search~\parencite[p.1]{Schwarz2006}
 
     \section*{Conclusion}
 
