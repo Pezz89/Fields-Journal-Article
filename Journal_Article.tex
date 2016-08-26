@@ -161,21 +161,27 @@
     naturally based on factors such as the pitch and timbre of the bass
     guitar. The result is a performance that mixes characteristics of both the
     bass guitar output and the qualities of the corpus database to create a
-    hybrid of the two.
+    hybrid of the two.\\
+
+    This is by no means an exhaustive overview of the projects and techniques
+    that explore the vast possibilities of CS. For further information, please
+    refer to: ``Concatenative Synthesis - The Early
+    Years''~\parencite{Schwarz2006b}
 
     \section{Concatenator}
-    The concatenator project was designed as a Python framework and
-    command-line tool for easy access to CS. The project aimed to provide an
-    open source set of tools that would allow composers to generate a variety
-    of CS driven realisations.  In addition, the project aimed to provide an
-    intuitive API that Python programmers could use as fundamental building
-    blocks to build further concatenative synthesis applications on.
+    The concatenator project aimed to provide an open source set of tools that
+    would allow composers to generate a variety of CS driven realisations for
+    sound design purposes.  In addition, the project aimed to provide an
+    intuitive API that Python programmers might use as the fundamental building
+    blocks to build further concatenative synthesis applications on.  
+    The result is a framework and command-line interface, built in Python, for
+    easy access to basic CS techniques.   
+
+    \section*{Program Design and Implementation}
     Why Python?
     instrument resynthesis onto a pre-existing source sound, rather than from scratch onto things like midi notes.
     Offline processing to allow for large databases to be used - disadvantage: loss of feedback between performer and system, as described in PA's paper.
     advantage: Real-time approach results in reduced continuity of grains
-
-    \section*{Program Design and Implementation}
     \subsection*{Framework Design}
     \subsection*{Descriptor Implementation}
 
@@ -186,6 +192,7 @@
     High quantity of parameters is very time consuming ~\parencite{Petrushin2007} 
 
     \section*{Results and Evaluation}
+    Reasonable results, further development needed for it to be truly useful
 
     \section*{Research Limitations/Potential Development}
     Given the limited time frame and complexity of modern approaches to this
