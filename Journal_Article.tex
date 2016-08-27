@@ -169,29 +169,66 @@
     Years''~\parencite{Schwarz2006b}
 
     \section{Concatenator}
-    The concatenator project aimed to provide an open source set of tools that
-    would allow composers to generate a variety of CS driven realisations for
-    sound design purposes.  In addition, the project aimed to provide an
+    The concatenator project aims to provide an open source set of tools that
+    allows composers to generate a variety of CS driven realisations for
+    sound design purposes.  In addition, the project aims to provide an
     intuitive API that Python programmers might use as the fundamental building
     blocks to build further concatenative synthesis applications on.  
     The result is a framework and command-line interface, built in Python, for
     easy access to basic CS techniques.   
+    The current implementation can be used for the concatenation of a source
+    database onto target audio files, using a range of perceptual audio
+    descriptors for matching. Database management, simple matching and
+    synthesis algorithms are used to achieve this, and are described in the
+    following sections.
 
     \section*{Program Design and Implementation}
-    Why Python?
-    instrument resynthesis onto a pre-existing source sound, rather than from scratch onto things like midi notes.
+    When designing the concatenator framework, ease of development, use and
+    extensability were primary considerations. It was for these reasons that
+    the framework was written in the Python programming language. Python has
+    grown in popularity in the scientific community recently, primarily due to
+    it's focus on productivity, readability and the large number of efficient
+    numeric processing libraries (Numpy, SciPy, Scikitlearn etc...)
+    available~\parencite[p.11]{Fangohr2014}. This makes Python a good choice
+    for quickly developing ideas in the context of audio signal processing.
+    Unfortunatley, the language does sacrafice processing speed for simplicity
+    and as a result is not suitable for real-time signal processing. Other
+    performance focused languages such as C++ are better suited to this type of
+    processing. However, it was decided that the increase in productivity, lack
+    of prior CS research and the author's previous experience in the language,
+    made it the most suitable choice for this project.
+
     Offline processing to allow for large databases to be used - disadvantage: loss of feedback between performer and system, as described in PA's paper.
     advantage: Real-time approach results in reduced continuity of grains
-    \subsection*{Framework Design}
+
+
+    instrument resynthesis onto a pre-existing source sound, rather than from scratch onto things like midi notes.
+
+    
     \subsection*{Descriptor Implementation}
 
+    \subsection*{Database Design}
+    Use of HDF5 for database information
+
     \subsection*{Matching Algorithms}
+    Brute force matching
+    Kd tree matching
+
+
     \subsection*{Synthesis and Transformations}
+    Windowing of grains
+    Pitch enforcement
+    RMS Enforcement
 
     \subsection*{Command line Interface}
     High quantity of parameters is very time consuming ~\parencite{Petrushin2007} 
 
+    \subsection*{Documentation and API}
+    Object oriented approach for intuitive API
+
     \section*{Results and Evaluation}
+
+    The choice to develop a purely offline project 
     Reasonable results, further development needed for it to be truly useful
 
     \section*{Research Limitations/Potential Development}
