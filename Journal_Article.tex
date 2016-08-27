@@ -168,7 +168,7 @@
     refer to: ``Concatenative Synthesis - The Early
     Years''~\parencite{Schwarz2006b}
 
-    \section{Concatenator}
+    \section*{Concatenator}
     The concatenator project aims to provide an open source set of tools that
     allows composers to generate a variety of CS driven realisations for
     sound design purposes.  In addition, the project aims to provide an
@@ -183,6 +183,8 @@
     following sections.
 
     \section*{Program Design and Implementation}
+    *INSERT OVERVIEW OF CONCATENATOR AS A WHOLE*
+
     When designing the concatenator framework, ease of development, use and
     extensability were primary considerations. It was for these reasons that
     the framework was written in the Python programming language. Python has
@@ -217,16 +219,38 @@
     such as the viterbi algorithm to find the sequence of grains that provide
     the best continuity, as demonstarted in the Catapillar
     project~\parencite[p.4]{Schwarz2003} This would not be possible in
-    real-time, as audio is processed on the fly.
+    real-time, as audio is processed on the fly.\\
 
-    
-    instrument resynthesis onto a pre-existing source sound, rather than from scratch onto things like midi notes.
-
+    An additional consideration was the method to be used for controlling the
+    target to be matched too. It was decided that the most interesting results
+    would be produced through the matching of grains to a target audio file, as
+    opposed to other approaches such as matching to midi scores. In this sense
+    the project is a form of offline audio-mosaicing tool similar to that of
+    CataRT.
     
     \subsection*{Descriptor Implementation}
+    In order to differentiate between grains, a number of audio descriptors
+    were implemented. Audio descriptors are used to measure a specific
+    characteristic of a signal~\parencite[p.31]{Lerch2012}. For example, an RMS
+    descriptor was implemented to give an indication of the overall intensity
+    of the grain. Another example is the F0 descriptor implemented to give a
+    value relating to pitch for harmonic grains. These values could then be
+    used by the matching algorithm in order to find the best match between the
+    source and target grains. A full description of all descriptors implemented
+    can be found in the Concatenator documentation.\\
+    Due to time constraints on the project, only a limited number of basic
+    descriptors were implemented. For this reason, it was ensured that new
+    descriptors could be added easily to the project. The object oriented
+    design of the descriptors provides the potential for quick development of
+    any future descriptors to be added to the project. 
 
     \subsection*{Database Design}
-    Use of HDF5 for database information
+    When generating descriptors for large database, large amounts of data are
+    produced and so an efficient method of storing and retriving the data was
+    needed to manage this. The Python interface to the HDF5 filesystem (h5py)
+    was chosen for it's simplicity and ability to compress the data
+    automatically. This allowed for quick and easy access to analyses from a
+    single, organized source.
 
     \subsection*{Matching Algorithms}
     Brute force matching
@@ -252,6 +276,10 @@
     \section*{Research Limitations/Potential Development}
     Given the limited time frame and complexity of modern approaches to this
     form of synthesis, only a basic implementation was possible.
+
+    Using Essentia to vastly increase the number of available descriptors.
+
+    Replacment of HDF5 to allow parallel processing
 
     Spectral matching~\parencite{Hoffman2009} 
     Use of RPM?~\parencite[p.82]{Lindemann2007}
