@@ -20,7 +20,7 @@
 \usepackage{blindtext}
 \setkomafont{disposition}{\normalfont\fontsize{12}{17}\bfseries}
 \setkomafont{section}{\normalfont\fontsize{12}{17}\bfseries}
-\setkomafont{subsection}{\normalfont\fontsize{12}{17}\bfseries\itshape}
+\setkomafont{subsection}{\normalfont\fontsize{12}{17}\itshape}
 \setkomafont{subsubsection}{\normalfont\fontsize{12}{17}\itshape}
 
 \graphicspath{{./resources/}}
@@ -41,7 +41,7 @@
     {}
 
 \begin{document}
-    \title{Descriptor Driven Concatenative Synthesis Tool}
+    \title{Descriptor Driven Concatenative Synthesis Tool for Python}
     % \subtitle{\LARGE{Abstract Draft}}
     \author{Sam Perry}
 
@@ -249,43 +249,117 @@
     produced and so an efficient method of storing and retriving the data was
     needed to manage this. The Python interface to the HDF5 filesystem (h5py)
     was chosen for it's simplicity and ability to compress the data
-    automatically. This allowed for quick and easy access to analyses from a
-    single, organized source.
+    automatically. Storing Numpy arrays of descriptors in groups allowed for
+    quick and easy access to analyses from a single, organized source.
 
     \subsection*{Matching Algorithms}
-    Brute force matching
-    Kd tree matching
-
+    In order to match grains using the descriptor values, a matching algorithm
+    was required. Initially a brute force matcher was used to compare each
+    descriptor value in the target to all values of the same descriptor type in
+    the source. However, it quickly became apparent that this approach would be
+    far to slow, particularly for larger database.\\
+    *INSERT O NOTATION FOR BRUTE FORCE MATCHER*
+    For this reason, a k dimensional tree search algorithm was used in an
+    effort to improve matching efficiciency.  This approach produced the same
+    results as the brute force matcher, but by arranging descriptors in a tree
+    structure, a far more efficient search to find the best match was possible.
+    this reduced matching time considerably.
+    *INSERT O NOTATION FOR KD TREE SEARCH*
 
     \subsection*{Synthesis and Transformations}
-    Windowing of grains
-    Pitch enforcement
-    RMS Enforcement
+    The final step in the program is to synthesize the matched output.
+    This process consisted of:
+    \begin{enumerate}
+        \item Retreiving the best grain matches returned by the matching algorithm
+        \item Applying a window function
+        \item Overlapping the grains 
+        \item Transform grains to match target
+        \item Saving the result to a file
+    \end{enumerate}
+    Initially, grains were not transformed to better match the target.  This
+    worked effectively for large databases, however it was observed that
+    results synthesized using small databases were of a lower quality as the
+    chance of a closely matched grain was lower. To account for this, methods
+    for altering grains to better match their target were implemented.  It was
+    decided that the two most significant characteristics to alter were the
+    pitch and intensity of the grains.  By scaling the grains by the difference
+    between the source and target RMS, it was possible to impose a closer
+    intensity on a grain. Likewise, by shifting the pitch of a grain by the
+    difference, it was possible to better match the pitch contour of the output
+    to that of the target audio.  This improved the results significantly in
+    smaller databases, as poor matches could be improved to match the target
+    more convincingly.
 
     \subsection*{Command line Interface}
-    High quantity of parameters is very time consuming ~\parencite{Petrushin2007} 
+    In order to make the framework accessible to users, a commandline interface
+    was developed. By supplying arguments to the program, users could alter
+    parameters and experiment freely with the tool.  Although this interface
+    was sufficient for testing and experimentation, it quickly became apparent
+    that there were too many parameters to pass to the program via the command
+    line interface on each run. A configuration file parser was created to
+    address this issue, allowing users to specify default parameters that would
+    be used by the program on each run. The combination of these interfaces
+    provided an effective means for accessing all of the framework's features.
 
     \subsection*{Documentation and API}
-    Object oriented approach for intuitive API
+    In order to make the project as user friendly as possible for both
+    developers and users, a significant amount of time was spent documenting
+    the code properly. As a result, a full API is available alongside examples
+    of use. This was written in the hope that it might form a useable package
+    that developers can build on quickly and effectively to build other CS
+    projects, allowing for easier access to Python based CS than is currently
+    available. The command line interface is equally documented to allow users
+    to create their own realisations quickly and easily so that this project
+    may be used for creative sound design purposes.
 
     \section*{Results and Evaluation}
-
-    The choice to develop a purely offline project 
-    Reasonable results, further development needed for it to be truly useful
+    In retrospect, a great deal of time was spent trying to improve the
+    efficiency of the project. Although this was neccessary, as initial tests
+    were not feasible on most databases, it had a negative impact on the time
+    available for developing perceptual qualities of the output. As a result of
+    this, the overall quality of output may perhaps not be as high as that of
+    other projects in this area. It is clear that in it's current state this
+    project does not have the level of sophistication that might be needed for
+    this style of synthesis. Factors such as the low quantity of descriptors
+    supplied and basic transformations impede the overall quality of results.
+    This is further exacerbated by high computation required, resulting in
+    large amounts of time needed to produce high quality results. An end user
+    may not have the patience required to to reach the quality of results that
+    might be possible. However, the fundamental concepts such as descriptor
+    matching and transforming matches to better fit the target, that are used
+    in the most sophisticated CS projects, have been implemented in this
+    project to reasonable effect. As a proof of concept, this project displays
+    the possibilities for CS in Python and there is clearly potential for
+    further development in this area.
 
     \section*{Research Limitations/Potential Development}
-    Given the limited time frame and complexity of modern approaches to this
-    form of synthesis, only a basic implementation was possible.
+    There are a number of further improvments that could be made to this
+    project in order to improve the quality of results and extend it's overall
+    usefulness. Some initial ideas for improvments are detailed in this
+    section. These range from reasonably simple modifications that could not be
+    implemented purely due to time constraints, to more complex ideas that may
+    take a considerable amount of work.
+
 
     Using Essentia to vastly increase the number of available descriptors.
 
-    Replacment of HDF5 to allow parallel processing
+    High quantity of parameters is very time consuming ~\parencite{Petrushin2007} 
+    Better ways of windowing using SOLA/PSOLA methods
+
+    Replacment of HDF5 to allow parallel processing 
+    possible use of more sophisticated database management system as demonstarted in the Catapillar project.
 
     Spectral matching~\parencite{Hoffman2009} 
+
     Use of RPM?~\parencite[p.82]{Lindemann2007}
+
+    Lack of continuity
     Viterbi path search~\parencite[p.1]{Schwarz2006a}
 
     \section*{Conclusion}
+    Given the limited time frame for the project and complexity of modern
+    approaches to this form of synthesis, only a basic implementation was
+    possible.
 
     \printbibliography
 \end{document}
