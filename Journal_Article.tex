@@ -24,7 +24,7 @@
 \setkomafont{subsubsection}{\normalfont\fontsize{12}{17}\itshape}
 
 \graphicspath{{./resources/}}
-\addbibresource{~/PerryPerrySource/LaTeX/library.bib}
+\addbibresource{~/Documents/library.bib}
 
 \usepackage{etoolbox}
 \makeatletter
@@ -104,7 +104,7 @@
     samples that have been directly recorded from a source, the subtle nuances
     of the source's sound are preserved. These would be difficult to reproduce
     using other synthetic methods for modeling an
-    instrument~\parencite[p.24]{Maestre2009a}.
+    instrument~\parencite[p.24]{Maestre2009}.
 
     \subsection*{Speech Synthesis}
     Creating a natural and intelligible realisation is an important factor when
@@ -188,20 +188,38 @@
     the framework was written in the Python programming language. Python has
     grown in popularity in the scientific community recently, primarily due to
     it's focus on productivity, readability and the large number of efficient
-    numeric processing libraries (Numpy, SciPy, Scikitlearn etc...)
-    available~\parencite[p.11]{Fangohr2014}. This makes Python a good choice
-    for quickly developing ideas in the context of audio signal processing.
+    numeric processing libraries available (Numpy, SciPy, Scikitlearn
+    etc...)~\parencite[p.11]{Fangohr2014}. This makes Python a good choice for
+    quickly developing ideas in the context of audio signal processing.
     Unfortunatley, the language does sacrafice processing speed for simplicity
     and as a result is not suitable for real-time signal processing. Other
     performance focused languages such as C++ are better suited to this type of
     processing. However, it was decided that the increase in productivity, lack
-    of prior CS research and the author's previous experience in the language,
-    made it the most suitable choice for this project.
+    of prior CS research and the author's previous experience in Python,
+    made it the most suitable choice for this project.\\
 
-    Offline processing to allow for large databases to be used - disadvantage: loss of feedback between performer and system, as described in PA's paper.
-    advantage: Real-time approach results in reduced continuity of grains
+    The choice to limit the project to offline processing has both positive and
+    negative implications on the function of the project. A key disadvantage to
+    this type of processing is the lack of possibility for any live performance
+    aspect. This method provides no way of exploring the feedback between
+    performer and system in a live environment, comparable to the work of
+    Tremblay and Schwarz's~\citeyearpar{Tremblay2010}.
+    However, there are advantages to offline processing that would not be
+    possible in a real-time context.\\
+    One significant advantage is that databases can afford to be far larger
+    than they could in real time. Without the requirement to process output in
+    a short period of time, more time can be taken to search vast databases in
+    the hope that the closest match to a target will be found.\\
+    Another advantage is in the global view of a target that can be taken in an
+    offline approach. Because the complete audio file is available from the
+    start of processing, techniques can be applied that consider the output as
+    a whole rather than on a grain by grain basis. This allows for algorithms
+    such as the viterbi algorithm to find the sequence of grains that provide
+    the best continuity, as demonstarted in the Catapillar
+    project~\parencite[p.4]{Schwarz2003} This would not be possible in
+    real-time, as audio is processed on the fly.
 
-
+    
     instrument resynthesis onto a pre-existing source sound, rather than from scratch onto things like midi notes.
 
     
