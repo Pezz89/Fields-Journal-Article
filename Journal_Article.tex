@@ -49,21 +49,18 @@
 
     \begin{abstract} 
     A command-line tool and Python framework is proposed for the exploration of
-    a new form of audio synthesis known as ``concatenative-synthesis'' (CS): A
+    a new form of audio synthesis known as ``concatenative synthesis'': A
     form of synthesis that uses perceptual audio analyses to arrange small
     segments of audio based on their characteristics.  The tool is designed to
     synthesise representations of an input sound using a database of source
     sounds. This involves the segmentation and analysis of both the input sound
     and database, matching of input segments to their closest segment from the
     database, and the re-synthesis of the closest matches from the database to
-    produce the final result.\\
-
-    The aim was to produce a tool capable of generating high quality sonic
-    representations of an input, and to present a variety of examples that
-    demonstrated the breadth of possibilities that this style of synthesis has
-    to offer. There are a number of projects that use this form of synthesis,
-    however this project aims primarily to explore the further potential
-    offered through the offline processing of large databases.\\
+    produce the final result. The aim was to produce a tool capable of
+    generating high quality sonic representations of an input, to present a
+    variety of examples that demonstrated the breadth of possibilities that
+    this style of synthesis has to offer and to provide a robust framework on
+    which concatenative synthesis projects could be developed easily.\\
 
     Results demonstrate the wide variety of sounds that can be produced using
     this method of synthesis. A number of technical issues are outlined that
@@ -76,20 +73,20 @@
     The concept of constructing a new sound by arranging collections of smaller
     sounds has gained popularity in the past 30 years through the introduction
     of ``Granular Synthesis''. Granular synthesis works on the theory that any
-    sound can be described through the arrangement of smaller samples (reffered
+    sound can be described through the arrangement of smaller samples (referred
     to as ``grains''). This representation of sound allows for the temporal
     decomposition and re-arranging of real-world samples, with the potential to
     create new ``complex, dynamically-evolving
     sounds.''~\parencite[p.1]{Roads1988}\\
 
-    Concatenative synthesis is a form of synthesis that has developed
+    Concatenative synthesis (CS) is a form of synthesis that has developed
     significantly over the past 15 years, driven by recent advancements in
     technology. Key advancements have been in easy access to large databases of
     audio and the development of methods for extracting useful information from
     these databases automatically~\parencite[p.1]{Schwarz2006a}.  CS utilises
     these technologies to provide a content-based extension to granular
     synthesis; by analysing a database of source grains, grains can be
-    differentiated based on their charcteristics.  These charachteristics can
+    differentiated based on their characteristics.  These characteristics can
     then be used for grain selection in the process of synthesizing output for
     a wide range of applications~\parencite[p.102]{Schwarz2007}.
 
@@ -103,18 +100,17 @@
     focus on defining sets of rules for emulating real sounds. By transforming
     samples that have been directly recorded from a source, the subtle nuances
     of the source's sound are preserved. These would be difficult to reproduce
-    using other synthetic methods for modeling an
+    using other synthetic methods for modelling an
     instrument~\parencite[p.24]{Maestre2009}.
 
     \subsection*{Speech Synthesis}
     Creating a natural and intelligible realisation is an important factor when
-    developing a speech synthesis system.*add part about continuity here* The
-    Talkapillar project is one such example of how highly convincing results
-    are possible with CS. Through careful analysis of a vocal database, the
-    project aims to impose the qualities of the database voice on an input
-    voice. This would result in the words of the input speaker being
-    transformed to appear as if they were spoken by the voice in the
-    database.~\parencite{Hueber}
+    developing a speech synthesis system. The Talkapillar project is one such
+    example of how highly convincing results are possible with CS. Through
+    careful analysis of a vocal database, the project aims to impose the
+    qualities of the database voice on an input voice. This would result in the
+    words of the input speaker being transformed to appear as if they were
+    spoken by the voice in the database.~\parencite{Hueber}
     
     \subsection*{Instrument Synthesis}
     Progress has also been made in improving the quality of instrument
@@ -127,16 +123,16 @@
     splicing of grains based on their expressive characteristics to form
     musical phrases.  For example, just as a violinist might transition
     seamlessly from one articulation to the next, the CS software will join
-    grains to produce the varyation in articulations. This contrasts the
+    grains to produce the variation in articulations. This contrasts the
     traditional approach to sampling, where samples are played in isolation,
     resulting in a discontinuity between adjacent samples~\parencite[p.82]{Lindemann2007}. 
     The Catapillar project is one such example of this use of CS. 
     By using a viterbi algorithm, the project is able to calculate the
-    smoothest overall transition between grains accross the output, resulting
+    smoothest overall transition between grains across the output, resulting
     in convincing synthesis of orchestral instrument performances~\parencite[p.5]{Schwarz2003}.
 
     \subsection*{Creative Sound Design}
-    The flexibilty of CS allows for creativity in a broader context than simply
+    The flexibility of CS allows for creativity in a broader context than simply
     emulating real-world instruments and speech. It can also be used as a tool
     to explore the possibilities for synthesizing new abstract sounds for
     creative purposes.\\
@@ -156,7 +152,7 @@
     method. CS is used in this context as a means for synthesizing matches in a
     corpus database to real-time input from an electric bass.  Significance is
     placed on linking the playback of grains to the expressivity of the
-    performer. The use of perceptualy based audio descriptors to match the
+    performer. The use of perceptually based audio descriptors to match the
     source to the target allows the performer to navigate the database
     naturally based on factors such as the pitch and timbre of the bass
     guitar. The result is a performance that mixes characteristics of both the
@@ -183,17 +179,25 @@
     following sections.
 
     \section*{Program Design and Implementation}
-    *INSERT OVERVIEW OF CONCATENATOR AS A WHOLE*
+    The Concatenator project consists of a number of components, as show below:\\
+
+    *INSERT Concatenator OVERVIEW DIAGRAM*\\
+
+    Output is generated by analysing overlapping segments of audio (known as
+    grains) from both the target sound and the source database, then searching
+    for the closest matching grain in the source database to the target sound.
+    Finally, the output is generated by overlap-adding the best matches. Each
+    component will be discussed in detail in the following sections.\\
 
     When designing the concatenator framework, ease of development, use and
-    extensability were primary considerations. It was for these reasons that
+    extensibility were primary considerations. It was for these reasons that
     the framework was written in the Python programming language. Python has
     grown in popularity in the scientific community recently, primarily due to
     it's focus on productivity, readability and the large number of efficient
     numeric processing libraries available (Numpy, SciPy, Scikitlearn
     etc...)~\parencite[p.11]{Fangohr2014}. This makes Python a good choice for
     quickly developing ideas in the context of audio signal processing.
-    Unfortunatley, the language does sacrafice processing speed for simplicity
+    Unfortunately, the language does sacrifice processing speed for simplicity
     and as a result is not suitable for real-time signal processing. Other
     performance focused languages such as C++ are better suited to this type of
     processing. However, it was decided that the increase in productivity, lack
@@ -217,7 +221,7 @@
     start of processing, techniques can be applied that consider the output as
     a whole rather than on a grain by grain basis. This allows for algorithms
     such as the viterbi algorithm to find the sequence of grains that provide
-    the best continuity, as demonstarted in the Catapillar
+    the best continuity, as demonstrated in the Catapillar
     project~\parencite[p.4]{Schwarz2003} This would not be possible in
     real-time, as audio is processed on the fly.\\
 
@@ -225,7 +229,7 @@
     target to be matched too. It was decided that the most interesting results
     would be produced through the matching of grains to a target audio file, as
     opposed to other approaches such as matching to midi scores. In this sense
-    the project is a form of offline audio-mosaicing tool similar to that of
+    the project is a form of offline audio-mosaicking tool similar to that of
     CataRT.
     
     \subsection*{Descriptor Implementation}
@@ -246,11 +250,12 @@
 
     \subsection*{Database Design}
     When generating descriptors for large database, large amounts of data are
-    produced and so an efficient method of storing and retriving the data was
-    needed to manage this. The Python interface to the HDF5 filesystem (h5py)
-    was chosen for it's simplicity and ability to compress the data
-    automatically. Storing Numpy arrays of descriptors in groups allowed for
-    quick and easy access to analyses from a single, organized source.
+    produced and so an efficient method of storing and retrieving the data was
+    needed to manage this. The Python interface to the HDF5
+    filesystem~\parencite{Collette2016} was chosen for it's simplicity and
+    ability to compress the data automatically. Storing Numpy arrays of
+    descriptors in groups allowed for quick and easy access to analyses from a
+    single, organized source.
 
     \subsection*{Matching Algorithms}
     In order to match grains using the descriptor values, a matching algorithm
@@ -258,19 +263,17 @@
     descriptor value in the target to all values of the same descriptor type in
     the source. However, it quickly became apparent that this approach would be
     far to slow, particularly for larger database.\\
-    *INSERT O NOTATION FOR BRUTE FORCE MATCHER*
-    For this reason, a k dimensional tree search algorithm was used in an
-    effort to improve matching efficiciency.  This approach produced the same
+    For this reason, a k-dimensional tree search algorithm was used in an
+    effort to improve matching efficiency.  This approach produced the same
     results as the brute force matcher, but by arranging descriptors in a tree
     structure, a far more efficient search to find the best match was possible.
-    this reduced matching time considerably.
-    *INSERT O NOTATION FOR KD TREE SEARCH*
+    This reduced matching time considerably.
 
     \subsection*{Synthesis and Transformations}
     The final step in the program is to synthesize the matched output.
     This process consisted of:
     \begin{enumerate}
-        \item Retreiving the best grain matches returned by the matching algorithm
+        \item Retrieving the best grain matches returned by the matching algorithm
         \item Applying a window function
         \item Overlapping the grains 
         \item Transform grains to match target
@@ -305,7 +308,7 @@
     In order to make the project as user friendly as possible for both
     developers and users, a significant amount of time was spent documenting
     the code properly. As a result, a full API is available alongside examples
-    of use. This was written in the hope that it might form a useable package
+    of use. This was written in the hope that it might form a usable package
     that developers can build on quickly and effectively to build other CS
     projects, allowing for easier access to Python based CS than is currently
     available. The command line interface is equally documented to allow users
@@ -314,7 +317,7 @@
 
     \section*{Results and Evaluation}
     In retrospect, a great deal of time was spent trying to improve the
-    efficiency of the project. Although this was neccessary, as initial tests
+    efficiency of the project. Although this was necessary, as initial tests
     were not feasible on most databases, it had a negative impact on the time
     available for developing perceptual qualities of the output. As a result of
     this, the overall quality of output may perhaps not be as high as that of
@@ -329,13 +332,13 @@
     matching and transforming matches to better fit the target, that are used
     in the most sophisticated CS projects, have been implemented in this
     project to reasonable effect. As a proof of concept, this project displays
-    the possibilities for CS in Python and there is clearly potential for
+    the possibilities for CS in Python and there is evidently potential for
     further development in this area.
 
     \section*{Research Limitations/Potential Development}
-    There are a number of further improvments that could be made to this
+    There are a number of further improvements that could be made to this
     project in order to improve the quality of results and extend it's overall
-    usefulness. Some initial ideas for improvments are detailed in this
+    usefulness. Some initial ideas for improvements are detailed in this
     section. These range from reasonably simple modifications that could not be
     implemented purely due to time constraints, to more complex ideas that may
     take a considerable amount of work.\\
@@ -354,22 +357,46 @@
     overlapping sections, as described by~\textcite[p.191-193]{Zolzer2011} in
     the SOLA algorithm.\\
 
-    Replacment of HDF5 to allow parallel processing 
-    possible use of more sophisticated database management system as demonstarted in the Catapillar project.
+    A lack of continuity between grains was observed in results, most likely
+    due to the lack of any comparison of selected grains. A viterbi algorithm
+    could be used to account for this, allowing for a search to be done amongst
+    the top matches to find the optimal set of grains. This takes advantage of
+    the offline nature of the project and has been shown to work effectively in
+    the Talkapillar project~\parencite{Hueber}.
+
+    Although the HDF5 filesystem allows for easy storage of descriptor values,
+    it also has drawbacks that limits the functionality of the project. One
+    significant problem is that it is difficult to implement parallel
+    processing using the library and for this reason asynchronous processing was
+    not implemented in the project. An alternative method of storage may
+    accommodate this more easily, allowing for the speed-ups possible through
+    asynchronous processing. The overall design of the database management was
+    also relatively naive and may benefit from being replaced by a technology
+    such as an SQL database or similar. This has been shown to work effectively
+    in work such as the CataRT project~\parencite[p.3]{Schwarz2006a}.
     
-    High quantity of parameters is very time consuming ~\parencite{Petrushin2007} 
-
-    Spectral matching~\parencite{Hoffman2009} 
-
-    Use of RPM?~\parencite[p.82]{Lindemann2007}
-
-    Lack of continuity
-    Viterbi path search~\parencite[p.1]{Schwarz2006a}
-
     \section*{Conclusion}
     Given the limited time frame for the project and complexity of modern
-    approaches to this form of synthesis, only a basic implementation was
-    possible.
+    approaches to this form of synthesis, only a basic implementation of CS is
+    presented. Nevertheless, this project has provided a functioning Python
+    based CS project with much potential for further development. Given the
+    high number of technical issues faced with this style of synthesis (from
+    the big data issues faced with analysis storage, to high efficiency
+    requirements for processing the large quantities of data), overall this
+    project appears to perform to a reasonable standard.\\
+    With the ever increasing quality of technology, it is predicted that new
+    techniques such as concatenative synthesis may grow further in popularity,
+    leading to an increasing number of possibilities in this area of sound
+    synthesis. It is hoped that this project might aid in the highlighting the
+    possibilities offered by this form of synthesis and demonstrate some of the
+    technical obstacles that must be addressed to design a CS project
+    successfully.
+
+    \section*{Acknowledgments}
+    The author would like to thanks A. Harker for his advice and guidance
+    as a mentor throughout the project, and to A. Harker and P. Chen for access
+    to their vocal samples database.  Thanks also to D. Chaplin for his
+    creative input in generating results.
 
     \printbibliography
 \end{document}
