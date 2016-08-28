@@ -338,21 +338,26 @@
     usefulness. Some initial ideas for improvments are detailed in this
     section. These range from reasonably simple modifications that could not be
     implemented purely due to time constraints, to more complex ideas that may
-    take a considerable amount of work.
+    take a considerable amount of work.\\
 
     The current implementation uses only a small and relatively basic subset of
     the audio descriptors available. This limits the analysis of audio and thus
     the quality of matches. Using a larger set of more advanced descriptors may
     improve quality from this perspective. One way would be to incorporate the
-    open source Essentia audio descriptors *citation needed* giving the project
-    access to a vast quantity of descriptors for analysis.
+    open source Essentia audio descriptors~\parencite{Essentia2016} giving the
+    project access to a vast quantity of descriptors for analysis.\\
 
-    Better ways of windowing using SOLA/PSOLA methods
-
-    High quantity of parameters is very time consuming ~\parencite{Petrushin2007} 
+    Replacing the hanning window function used for grain windowing with a short
+    cross fade at grain overlaps should reduce amplitude modulation, resulting
+    in smoother transitions between grains. This might be further improved
+    through calculating the point of maximum similarity by cross-correlating
+    overlapping sections, as described by~\textcite[p.191-193]{Zolzer2011} in
+    the SOLA algorithm.\\
 
     Replacment of HDF5 to allow parallel processing 
     possible use of more sophisticated database management system as demonstarted in the Catapillar project.
+    
+    High quantity of parameters is very time consuming ~\parencite{Petrushin2007} 
 
     Spectral matching~\parencite{Hoffman2009} 
 
