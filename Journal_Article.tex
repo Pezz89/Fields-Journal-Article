@@ -1,4 +1,4 @@
-\documentclass{scrartcl}
+\documentclass[titlepage]{scrartcl}
 \usepackage{enumitem}
 \usepackage[british]{babel}
 \usepackage[style=apa, backend=biber]{biblatex}
@@ -26,13 +26,16 @@
 \graphicspath{{./resources/}}
 \addbibresource{~/Documents/library.bib}
 
-\usepackage{etoolbox}
-\makeatletter
-\expandafter\patchcmd\csname\string\maketitle\endcsname
-  {\vskip\z@\@plus3fill}
-  {\vskip\z@\@plus2fill\box\abstractbox\vskip\z@\@plus1fill}
-  {}{}
-\makeatother
+\usepackage[affil-it]{authblk}
+
+% \usepackage{etoolbox}
+% \makeatletter
+% \expandafter\patchcmd\csname\string\maketitle\endcsname
+%   {\vskip\z@\@plus3fill}
+%   {\vskip\z@\@plus2fill\box\abstractbox\vskip\z@\@plus1fill}
+%   {}{}
+% \makeatother
+% 
 
 \DeclareCiteCommand{\citeyearpar}
     {}
@@ -43,24 +46,25 @@
 \begin{document}
     \title{Descriptor Driven Concatenative Synthesis Tool for Python}
     % \subtitle{\LARGE{Abstract Draft}}
-    \author{Sam Perry}
+    \author{S. Perry\thanks{E-mail: \texttt{\href{mailto:u1265119@unimail.hud.ac.uk}{u1265119@unimail.hud.ac.uk}}}}
+    \date{Dated: \today}
 
     \maketitle
 
     \begin{abstract} 
     A command-line tool and Python framework is proposed for the exploration of
-    a new form of audio synthesis known as ``concatenative synthesis'': A
-    form of synthesis that uses perceptual audio analyses to arrange small
-    segments of audio based on their characteristics.  The tool is designed to
+    a new form of audio synthesis known as ``concatenative synthesis'': A form
+    of synthesis that uses perceptual audio analyses to arrange small segments
+    of audio based on their characteristics.  The tool is designed to
     synthesise representations of an input sound using a database of source
     sounds. This involves the segmentation and analysis of both the input sound
     and database, matching of input segments to their closest segment from the
-    database, and the re-synthesis of the closest matches from the database to
-    produce the final result. The  project aims to provide a tool capable of
-    generating high quality sonic representations of an input, to present a
-    variety of examples that demonstrated the breadth of possibilities that
-    this style of synthesis has to offer and to provide a robust framework on
-    which concatenative synthesis projects can be developed easily.\\
+    database, and the re-synthesis of the closest matches to produce the final
+    result. The  project aims to provide a tool capable of generating high
+    quality sonic representations of an input, to present a variety of examples
+    that demonstrated the breadth of possibilities that this style of synthesis
+    has to offer and to provide a robust framework on which concatenative
+    synthesis projects can be developed easily.\\
 
     Results demonstrate the wide variety of sounds that can be produced using
     this method of synthesis. A number of technical issues are outlined that
@@ -113,10 +117,10 @@
     spoken by the voice in the database.~\parencite{Hueber}
     
     \subsection*{Instrument Synthesis}
-    Progress has also been made in improving the quality of instrument
+    Progress has also been made in improving the quality of instrumental
     synthesis. As with speech synthesis, the use of samples directly allows for
     natural sounding results, which provides a method for reproducing real
-    instruments convincingly. Another important aspect of instrument synthesis is that of performer
+    instruments convincingly. Another important aspect of instrumental synthesis is that of performer
     expression. The reproduction of performance qualities such as dynamics,
     timbre and timing are essential when emulating a real instrument and CS has
     been used to effectively reproduce these aspects. This is achieved through
@@ -127,7 +131,7 @@
     traditional approach to sampling, where samples are played in isolation,
     resulting in a discontinuity between adjacent samples~\parencite[p.82]{Lindemann2007}. 
     The Catapillar project is one such example of this use of CS. 
-    By using a viterbi algorithm, the project is able to calculate the
+    By using a Viterbi algorithm, the project is able to calculate the
     smoothest overall transition between grains across the output, resulting
     in convincing synthesis of orchestral instrument performances~\parencite[p.5]{Schwarz2003}.
 
@@ -179,9 +183,12 @@
     following sections.
 
     \section*{Program Design and Implementation}
-    The Concatenator project consists of a number of components, as show below:\\
+    The Concatenator project consists of a number of components that work
+    together to produce the final output. A complete description of all
+    components and there usage in the concatenator project can be found in it's
+    complete documentation at:\\
 
-    *INSERT Concatenator OVERVIEW DIAGRAM*\\
+    *PERMANENT URL FOR DOCUMENTATION NEEDED*\\
 
     Output is generated by analysing overlapping segments of audio (known as
     grains) from both the target sound and the source database, then searching
@@ -221,13 +228,13 @@
     offline approach. Because the complete audio file is available from the
     start of processing, techniques can be applied that consider the output as
     a whole rather than on a grain by grain basis. This allows for algorithms
-    such as the viterbi algorithm to find the sequence of grains that provide
+    such as the Viterbi algorithm to find the sequence of grains that provide
     the best continuity, as demonstrated in the Catapillar
     project~\parencite[p.4]{Schwarz2003} This would not be possible in
-    real-time, as audio is processed on the fly.\\
+    real-time, as audio is processed on-the-fly.\\
 
     An additional consideration was the method to be used for controlling the
-    target to be matched too. It was decided that the most interesting results
+    target to be matched to. It was decided that the most interesting results
     would be produced through the matching of grains to a target audio file, as
     opposed to other approaches such as matching to MIDI scores. In this sense
     the project is a form of offline audio-mosaicking tool similar to that of
@@ -306,46 +313,65 @@
     provided an effective means for accessing all of the framework's features.
 
     \subsection*{Documentation and API}
-    In order to make the project as user friendly as possible for both
-    developers and users, a significant amount of time was spent documenting
-    the code properly. As a result, a full API is available alongside examples
-    of use. This was written in the hope that it might form a usable package
-    that developers can build on quickly and effectively to build other CS
-    projects, allowing for easier access to Python based CS than is currently
-    available. The command line interface is equally documented to allow users
-    to create their own realisations quickly and easily so that this project
-    may be used for creative sound design purposes.
+    Complete documentation for the project was created in order to make the
+    project as user friendly as possible for both developers and users.  As a
+    result, a full API is available alongside examples of use and instructions
+    for commandline operation. This was created in the hope that it might form
+    a usable package that developers can build on quickly and effectively to
+    build other CS projects, allowing for easier access to Python based CS than
+    is currently available. The command line interface is equally documented to
+    allow users to create their own realisations quickly and easily so that
+    this project may be used for creative sound design purposes.
 
     \section*{Results and Evaluation}
     Overall, results generated by this project showed promise; a variety of
     transformations were generated using open source instrument databases to
-    demonstarte the projects potential for sound design application. This
+    demonstrate the projects potential for sound design application. This
     tested the project's ability to convincingly impose qualities of an
-    instrument onto target sounds. 
+    instrument onto target sounds. A variety of examples are provided that
+    outline the style of synthesis aimed for. These range from imposing
+    acoustic guitar qualities on an electric guitar to imposing stringed
+    instrument qualities on vocal melodies. Current results have a clear
+    synthetic nature, but still clearly exhibit some of the main
+    characteristics of the database used.\\
 
+    \noindent
+    Concatenator project examples that demonstrate current results can be found at:\\
+
+    *PERMENANT URL FOR RESULTS NEEDED*\\
+
+    \section*{Research Limitations/Potential Development}
     In retrospect, a great deal of time was spent trying to improve the
     efficiency of the project. Although this was necessary, as initial tests
     were not feasible on most databases, it had a negative impact on the time
     available for developing perceptual qualities of the output. As a result of
-    this, the overall quality of output may perhaps not be as high as that of
-    other projects in this area. 
-    high computation required, resulting in
-    large amounts of time needed to produce high quality results. An end user
-    may not have the patience required to to reach the quality of results that
-    might be possible. However, the fundamental concepts such as descriptor
-    matching and transforming matches to better fit the target, that are used
-    in the most sophisticated CS projects, have been implemented in this
-    project to reasonable effect. As a proof of concept, this project displays
+    this, the overall quality of output may perhaps not be as natural as that of
+    other projects in this area. This is apparent in the vocal -> string
+    instrument examples. Phrases tend to begin and end abruptly, failing to
+    replicate any defined attack or decay of the string instruments, as would
+    be expected when hearing a string instrument naturally. Conversely, this
+    does give output it's own synthetic characteristic, which may be desirable
+    as perfect reproduction of an instrument may not be the reason for using
+    this tool.\\
+    In Addition, the high computation required results in large amounts of time
+    needed to produce high quality results. An end user may not have the
+    patience required to to reach the quality of results that might be
+    possible. This is in part a set back of the Python language, and could be
+    better accounted for with further work on profiling the performance of the
+    tool.\\
+    However, the fundamental concepts such as descriptor matching and
+    transforming matches to better fit the target, that are used in the most
+    sophisticated CS projects, have been implemented in this project to
+    satisfying creative effect. As a proof of concept, this project displays
     the possibilities for CS in Python and there is evidently potential for
-    further development in this area.
+    further development in this area.\\
 
-    \section*{Research Limitations/Potential Development}
     There are a number of further improvements that could be made to this
     project in order to improve the quality of results and extend it's overall
     usefulness. Some initial ideas for improvements are detailed in this
-    section. These range from reasonably simple modifications that could not be
-    implemented purely due to time constraints, to more complex ideas that may
-    take a considerable amount of work.\\
+    section below. These range from reasonably simple modifications that could
+    not be implemented purely due to time constraints, to more complex ideas
+    that may take a considerable amount of work.\\
 
     The current implementation uses only a small and relatively basic subset of
     the audio descriptors available. This limits the analysis of audio and thus
@@ -362,7 +388,7 @@
     the SOLA algorithm.\\
 
     A lack of continuity between grains was observed in results, most likely
-    due to the lack of any comparison of selected grains. A viterbi algorithm
+    due to the lack of any comparison of selected grains. A Viterbi algorithm
     could be used to account for this, allowing for a search to be done amongst
     the top matches to find the optimal set of grains. This takes advantage of
     the offline nature of the project and has been shown to work effectively in
@@ -380,21 +406,19 @@
     in work such as the CataRT project~\parencite[p.3]{Schwarz2006a}.
     
     \section*{Conclusion}
-    Given the limited time frame for the project and complexity of modern
-    approaches to this form of synthesis, only a basic implementation of CS is
-    presented. Nevertheless, this project has provided a functioning Python
-    based CS project with much potential for further development. Given the
-    high number of technical issues faced with this style of synthesis (from
-    the big data issues faced with analysis storage, to high efficiency
-    requirements for processing the large quantities of data), overall this
-    project appears to perform to a reasonable standard.\\
-    With the ever increasing quality of technology, it is predicted that new
-    techniques such as concatenative synthesis may grow further in popularity,
-    leading to an increasing number of possibilities in this area of sound
-    synthesis. It is hoped that this project might aid in the highlighting the
-    possibilities offered by this form of synthesis and demonstrate some of the
-    technical obstacles that must be addressed to design a CS project
-    successfully.
+    This project has provided a functioning Python based CS project with much
+    potential for further development. Given the number of technical issues
+    faced with this style of synthesis (from the big data issues faced with
+    analysis storage, to high efficiency requirements for processing the large
+    quantities of data), overall this project appears to work effectively. It
+    provides a new and accessible means for tapping some of the vast amount of
+    potential that concatenative synthesis has to offer.\\ With the ever
+    increasing quality of technology, it is predicted that new techniques such
+    as concatenative synthesis may grow further in popularity, leading to an
+    increasing number of possibilities in this area of sound synthesis. It is
+    hoped that this project might aid in the highlighting the possibilities
+    offered by this form of synthesis and demonstrate some of the technical
+    obstacles that must be addressed to design a CS project successfully.
 
     \section*{Acknowledgments}
     The author would like to thanks A. Harker for his advice and guidance
